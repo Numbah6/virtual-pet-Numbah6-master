@@ -174,7 +174,6 @@ public static void tick(){
         VirtualPetApplication.petAnswer();
         VirtualPetApplication.tick();
         VirtualPetApplication.loopBreak();
-        VirtualPetApplication.displayPets();
         }
 
         
