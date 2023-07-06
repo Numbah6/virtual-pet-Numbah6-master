@@ -1,8 +1,5 @@
 package virtual_pet;
 import java.util.Scanner;
-
-import javax.sound.sampled.SourceDataLine;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -47,6 +44,7 @@ public class VirtualPetApplication {
         return tiredness;
     }
 
+    //Showing instance variables that update 
     public static void displayPets(){
         System.out.println(name);
         System.out.println("Hunger: "+hunger);
@@ -55,6 +53,75 @@ public class VirtualPetApplication {
         System.out.println("Tiredness "+tiredness);
     }
     
+    //method for asking and looping through the questions
+    public static void listQuestions(){
+        List<String> questions = new ArrayList<>();
+        questions.add("What would you like to do with "+name+" ?");
+        questions.add("1.Feed "+name+" ?");
+        questions.add("2. Give "+name+" water?");
+        questions.add("3. Play with "+name+" ?");
+        questions.add("4. Tell "+name+" to go to sleep? ");
+        questions.add("5. Do nothing. ");
+
+        boolean playing = true;
+        while(playing){
+            displayPets();
+            for (String question : questions){
+            System.out.println(question);
+            playing = false;
+        }}
+    }
+
+    public static void petAnswer(){
+        Scanner userInput = new Scanner(System.in);
+        int petChoice = userInput.nextInt();
+            userInput.nextLine();
+            switch(petChoice){
+                case 1:
+                System.out.println("You gave "+name+" some food.");
+                eat(petChoice);
+                break;
+
+                case 2:
+                System.out.println("You gave "+name+" some water");
+                drink(petChoice);;
+
+                case 3:
+                System.out.println("You took "+name+"to the park to play");
+                play(petChoice);
+                break;
+
+                case 4:
+                System.out.println(name+" went to sleep...sweet dreams!");
+                sleep(petChoice);
+                break;
+
+                case 5:
+                System.out.println("You and "+name+" decided to be lazy today");
+                lazy(petChoice);
+                break;
+
+                default:
+                System.out.println("Thats not a valid answer, please try again");
+                break;
+
+            }
+    }
+
+    //method to break out of the loop
+    public static void loopBreak(){
+        System.out.println("Would you like to keep playing? Yes/No");
+            Scanner userInput = new Scanner(System.in);
+            String keepPlaying = userInput.nextLine();
+            if(keepPlaying.equalsIgnoreCase("yes")){
+                boolean playing = true;
+            }
+            else {
+            //Closing the scanner
+                System.out.println("Goodbye "+name+" will miss you!");
+            userInput.close(); 
+        }
+    }
 
 
 
@@ -94,73 +161,32 @@ public static void tick(){
     tiredness += 5;
 }
     public static void main(String[] args) {
-        List<String> questions = new ArrayList<>();
-        questions.add("What would you like to do with "+name+" ?");
-        questions.add("1.Feed "+name+" ?");
-        questions.add("2. Give "+name+" water?");
-        questions.add("3. Play with "+name+" ?");
-        questions.add("4. Tell "+name+" to go to sleep? ");
-        questions.add("5. Do nothing. ");
+        
         
         //Adding scanner to take user input
-        Scanner userInput = new Scanner(System.in);
+        // Scanner userInput = new Scanner(System.in);
+        VirtualPetApplication Sharky = new VirtualPetApplication("Sharky", 100, 100, 0, 0);
+
         boolean playing = true;
+        while(playing){
+        VirtualPetApplication.displayPets();
+        VirtualPetApplication.listQuestions();
+        VirtualPetApplication.petAnswer();
+        VirtualPetApplication.tick();
+        VirtualPetApplication.loopBreak();
+        VirtualPetApplication.displayPets();
+        }
+
         
 
-        //Looping through questions
-        while(playing){
-            displayPets();
-            for (String question : questions){
-            System.out.println(question);
-            playing = false;
-        }
-        //Doing something with the answers and updating values 
-            int petChoice = userInput.nextInt();
-            userInput.nextLine();
-            switch(petChoice){
-                case 1:
-                System.out.println("You gave "+name+" some food.");
-                eat(petChoice);
-                break;
-
-                case 2:
-                System.out.println("You gave "+name+" some water");
-                drink(petChoice);;
-
-                case 3:
-                System.out.println("You took "+name+"to the park to play");
-                play(petChoice);
-                break;
-
-                case 4:
-                System.out.println(name+" went to sleep...sweet dreams!");
-                sleep(petChoice);
-                break;
-
-                case 5:
-                System.out.println("You and "+name+" decided to be lazy today");
-                lazy(petChoice);
-                break;
-
-                default:
-                System.out.println("Thats not a valid answer, please try again");
-                break;
-
-            }
-            tick();
-            // A way to break the loop
-            System.out.println("Would you like to keep playing? Yes/No");
-            String keepPlaying = userInput.nextLine();
-            if(keepPlaying.equalsIgnoreCase("yes")){
-                playing = true;
-            }
-            else {
-            //Closing the scanner
-                System.out.println("Goodbye "+name+" will miss you!");
-            userInput.close(); 
+        
+        
+            
+            
             }
             
         }
+    
 
         
         
@@ -170,8 +196,8 @@ public static void tick(){
     
         
         
-}
-}
+
+
 
 
 
